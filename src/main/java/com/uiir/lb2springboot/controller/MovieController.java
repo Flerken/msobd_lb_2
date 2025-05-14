@@ -1,5 +1,6 @@
 package com.uiir.lb2springboot.controller;
 
+import com.uiir.lb2springboot.DTO.MovieDTO;
 import com.uiir.lb2springboot.model.Movie;
 import com.uiir.lb2springboot.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,12 @@ public class MovieController {
     @PostMapping("/create")
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
         Movie createdMovie = movieService.addMovie(movie);
+        return new ResponseEntity<>(createdMovie, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Movie> addMovie(@RequestBody MovieDTO movie) {
+        Movie createdMovie = movieService.addMovieToCinema(movie);
         return new ResponseEntity<>(createdMovie, HttpStatus.CREATED);
     }
 

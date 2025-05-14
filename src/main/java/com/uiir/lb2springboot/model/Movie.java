@@ -1,7 +1,12 @@
 package com.uiir.lb2springboot.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -19,4 +24,12 @@ public class Movie {
     private double rating;
     @Column(name = "release_date")
     private LocalDate releaseDate;
+
+    @ManyToMany()
+    @JoinTable(
+            name = "cinema_movie",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "cinema_id")
+    )
+    private List<Cinema> cinemas = new ArrayList<>();;
 }
